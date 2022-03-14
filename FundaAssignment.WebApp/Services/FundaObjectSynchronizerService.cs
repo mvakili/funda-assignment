@@ -18,7 +18,7 @@ public class FundaObjectSynchronizerService : IHostedService
         // Seeding Objects
         await ReloadObjectsAsync();
 
-        timer = new Timer(StartReloadinObjects, null, TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2));
+        timer = new Timer(StartReloadinObjects, null, TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5));
 
         await Task.CompletedTask;
     }

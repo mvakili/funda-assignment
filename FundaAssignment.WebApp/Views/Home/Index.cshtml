@@ -1,5 +1,67 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using FundaAssignment.WebApp.ViewModels
+@model HomeViewModel
 @{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
 }
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Top Makelaars in Amsterdam
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Makelaar Naam</th>
+                                <th scope="col">Items Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TopAmsterdamMakerlaars)
+                            {
+                                <tr>
+                                    <td>@item.MakelaarId</td>
+                                    <td>@item.MakelaarNaam</td>
+                                    <td>@item.ItemsCount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Top Makelaars in Amsterdam For objects with Tuin
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Makelaar Naam</th>
+                                <th scope="col">Items Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TopAmsterdamMakerlaarsWithTuin)
+                            {
+                                <tr>
+                                    <td>@item.MakelaarId</td>
+                                    <td>@item.MakelaarNaam</td>
+                                    <td>@item.ItemsCount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
