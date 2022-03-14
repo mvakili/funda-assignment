@@ -16,6 +16,8 @@ builder.Services.AddSingleton<IObjectsRepository, ObjectsRepository>();
 
 // registers logic services
 builder.Services.AddSingleton<IObjectsService, ObjectsService>();
+builder.Services.AddSingleton<IMakelaarsService, MakelaarsService>();
+
 
 // registers hosted services
 builder.Services.AddHostedService<FundaObjectSynchronizerService>();

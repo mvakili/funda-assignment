@@ -3,3 +3,4 @@
 public record ObjectDto(Guid Id, int MakelaarId, string MakelaarNaam);
 public record PagingDto(int AantalPaginas, int HuidigePagina);
 public record PaginatedObjectsDto(IEnumerable<ObjectDto> Objects, PagingDto Paging);
+public record MakelaarDto(int MakelaarId, string MakelaarNaam, int ItemsCount);
