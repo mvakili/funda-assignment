@@ -17,6 +17,9 @@ builder.Services.AddSingleton<IObjectsRepository, ObjectsRepository>();
 // registers logic services
 builder.Services.AddSingleton<IObjectsService, ObjectsService>();
 
+// registers hosted services
+builder.Services.AddHostedService<FundaObjectSynchronizerService>();
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
