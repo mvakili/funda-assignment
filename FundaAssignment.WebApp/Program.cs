@@ -22,6 +22,8 @@ builder.Services.AddSingleton<IMakelaarsService, MakelaarsService>();
 // registers hosted services
 builder.Services.AddHostedService<FundaObjectSynchronizerService>();
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

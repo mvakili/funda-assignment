@@ -7,23 +7,37 @@ namespace FundaAssignment.WebApp.Services
     public class MakelaarsService : IMakelaarsService
     {
         private readonly IObjectsService objectsService;
-        public MakelaarsService(IObjectsService objectsService)
+        private readonly IMemoryCache memoryCache;
+        private const string MAKELAARS_WITH_MOST_OBJECTS_KEY = "MAKELAARS_WITH_MOST_OBJECTS";
+        private const string MAKELAARS_WITH_MOST_OBJECTS_WITH_TUIN_KEY = "MAKELAARS_WITH_MOST_OBJECTS_WITH_TUIN";
+        public MakelaarsService(
+            IObjectsService objectsService,
+            IMemoryCache memoryCache)
         {
             this.objectsService = objectsService;
+            this.memoryCache = memoryCache;
         }
 
         public IEnumerable<MakelaarDto> GetMakelaarsWithMostObjectsInAmsterdam(int count)
         {
-            var objects = objectsService.GetAmsterdamObjects();
-            var topMakelaars = TakeTopMakelaarsFromObjects(objects, count);
+            var topMakelaars = memoryCache.GetOrCreate(MAKELAARS_WITH_MOST_OBJECTS_KEY + $"_{count}", entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
+                var objects = objectsService.GetAmsterdamObjects();
+                return TakeTopMakelaarsFromObjects(objects, count);
+            });
 
             return topMakelaars;
         }
 
         public IEnumerable<MakelaarDto> GetMakelaarsWithMostObjectsWithTuinInAmsterdam(int count)
         {
-            var objects = objectsService.GetAmsterdamObjectsWithTuin();
-            var topMakelaars = TakeTopMakelaarsFromObjects(objects, count);
+            var topMakelaars = memoryCache.GetOrCreate(MAKELAARS_WITH_MOST_OBJECTS_WITH_TUIN_KEY + $"_{count}", entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(2);
+                var objects = objectsService.GetAmsterdamObjectsWithTuin();
+                return TakeTopMakelaarsFromObjects(objects, count);
+            });
 
             return topMakelaars;
         }
