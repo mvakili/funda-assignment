@@ -1,5 +1,7 @@
 using FundaAssignment.WebApp.Configurations;
 using FundaAssignment.WebApp.Extensions;
+using FundaAssignment.WebApp.Repositories;
+using FundaAssignment.WebApp.Repositories.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,8 @@ var fundaApiConfiguration = builder.Configuration.GetSection(nameof(FundaApiConf
 builder.Services.AddFundaHttpClient(fundaApiConfiguration);
 
 // Add services to the container.
+builder.Services.AddSingleton<IObjectsRepository, ObjectsRepository>();
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
