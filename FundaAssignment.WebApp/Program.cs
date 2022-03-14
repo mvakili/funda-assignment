@@ -2,6 +2,8 @@ using FundaAssignment.WebApp.Configurations;
 using FundaAssignment.WebApp.Extensions;
 using FundaAssignment.WebApp.Repositories;
 using FundaAssignment.WebApp.Repositories.Contracts;
+using FundaAssignment.WebApp.Services;
+using FundaAssignment.WebApp.Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 var fundaApiConfiguration = builder.Configuration.GetSection(nameof(FundaApiConfiguration)).Get<FundaApiConfiguration>();
 builder.Services.AddFundaHttpClient(fundaApiConfiguration);
 
-// Add services to the container.
+// registers repositories
 builder.Services.AddSingleton<IObjectsRepository, ObjectsRepository>();
+
+// registers logic services
+builder.Services.AddSingleton<IObjectsService, ObjectsService>();
 
 builder.Services.AddRazorPages();
 
@@ -19,8 +24,6 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
