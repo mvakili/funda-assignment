@@ -1,4 +1,11 @@
+using FundaAssignment.WebApp.Configurations;
+using FundaAssignment.WebApp.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// registers funda-api http client. applies rate limit + retries on error
+var fundaApiConfiguration = builder.Configuration.GetSection(nameof(FundaApiConfiguration)).Get<FundaApiConfiguration>();
+builder.Services.AddFundaHttpClient(fundaApiConfiguration);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
