@@ -9,7 +9,7 @@ This project shows top makelaars (Real states) in Amsterdam. We have 2 makelaars
  - Top 10 Makelaars in Amsterdam with most objects for sale
  - Top 10 Makelaars in Amsterdam with most objects with tuin (garden) for sale
 
-## Where we are standing and what we are supposed to do?
+## Where we are standing?
 
  - We have an API endpoint using that we can retrieve all objects listed for sale in Amsterdam
 
